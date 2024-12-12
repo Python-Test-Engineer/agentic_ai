@@ -1,5 +1,5 @@
 requests
-opneai
+openai
 anthropic
 python-dotenv
 gradio
