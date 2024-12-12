@@ -1,6 +1,0 @@
-requests
-opneai
-anthropic
-python-dotenv
-gradio
-streamlit
