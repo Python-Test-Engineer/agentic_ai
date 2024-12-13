@@ -17,14 +17,16 @@ anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
 # google_api_key = os.getenv('GOOGLE_API_KEY')
 
 if openai_api_key:
-    print(f"OpenAI API Key exists and begins {openai_api_key[:8]}")
+    console.print(f"[cyan]OpenAI API Key exists and begins: {openai_api_key[:8]}[/]")
 else:
-    print("OpenAI API Key not set")
+    console.print("[red]OpenAI API Key not set[/red]")
 
 if anthropic_api_key:
-    print(f"Anthropic API Key exists and begins {anthropic_api_key[:7]}")
+    console.print(
+        f"[cyan]Anthropic API Key exists and begins: {anthropic_api_key[:7]}[/cyan]"
+    )
 else:
-    print("Anthropic API Key not set")
+    console.print("[red]Anthropic API Key not set[/red]")
 
 
 openai = OpenAI()
@@ -118,15 +120,19 @@ class Agent:
 
     def give_answer(self):
         output = self.get_tool()
-        print(type(output), output)
+        console.print("Tool chosen: ", output)
+        console.print("output type: ", type(output))
 
         if output["next"] == "do_calculation":
+            console.print("[purple italic]do_calculation...[/]")
             num1 = output["arguments"]["num1"]
             num2 = output["arguments"]["num2"]
             operation = output["arguments"]["operation"]
             answer = self.do_calculation(num1, num2, operation)
             return answer
         elif output["next"] == "do_joke":
+            console.print("[purple italic]do_joke...[/]")
+
             answer = self.do_joke()
             # answer = "get a joke"
             answer = answer["setup"] + "\n" + answer["punchline"]
