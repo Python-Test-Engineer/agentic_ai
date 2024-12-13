@@ -42,8 +42,8 @@ TOOLS
 
 You have two tools:
 
-1. A calculator tool that can perform basic arithmetic operations, such as addition, subtraction, multiplication, and division. If this tool is used then respond as detailed in the OUTPUT section with "next": "do_calculation"
-2. A jokes tool that can provide a light-hearted joke for the audience reqested. If this tool is used then respond as detailed in <OUTPUT> with "next": "do_joke" and "audience": "audience requested"
+1. A calculator tool that can perform basic arithmetic operations, such as addition, subtraction, multiplication, and division. If this tool is used then respond as detailed in JSON Format with "next": "do_calculation"
+2. A jokes tool that can provide a light-hearted joke for the audience reqested. If this tool is used then respond in JSON Format with "next": "do_joke" and "audience": "audience requested"
 
 
 OUTPUT
@@ -52,14 +52,20 @@ For a user query, determine the best tool. If none of the tools are appropriate,
 
 EXAMPLES
 
-    First Example
+    ## First Example
     
-    |{"tool": "calculator", "next": "do_calculation", "arguments": {"num1": 5, "num2": 5, "operation": "addition"}}|
+    ### Question
+    "What is 5 plus 5?
+    ### Response    
+    {"tool": "calculator", "next": "do_calculation", "arguments": {"num1": 5, "num2": 5, "operation": "addition"}}
 
-    Second Example
-
+    ## Second Example
     
-    |{"tool": "joke", "next": "do_joke", "audience": "Pythonistas" }}|
+    ### Question
+    "Tell me a joke when I am doing stand up at a Builders Conference"
+    ### Response 
+    
+    {"tool": "joke", "next": "do_joke", "audience": "Pythonistas" }}
     
 Thank you for your help.
 """
@@ -68,9 +74,7 @@ system_message += ai_programming
 
 
 user_prompt = "What is 5 times 9?"
-# user_prompt = "Tell me a joke when I am doing stand up at a Builders Conference"
-
-# user_prompt = "Tell me a joke when I am doing stand up at a Builders Conference"
+user_prompt = "Tell me a joke when I am doing stand up at a Builders Conference"
 
 prompts = [
     {"role": "system", "content": system_message},
@@ -84,10 +88,12 @@ class Agent:
         self.prompt = prompts
 
     def get_tool(self):
+        # print(self.prompt)
         response = openai.chat.completions.create(
             model=self.model, messages=self.prompt
         )
         output = response.choices[0].message.content.replace("\n", "")
+        # print(output)
         json_output = output.strip()
         json_output = json.loads(json_output)
         # print(json_output)
@@ -103,8 +109,12 @@ class Agent:
         elif operation == "division":
             return num1 / num2
 
-    def do_joke(self, audience):
-        return f"Joke for {audience}"
+    def do_joke(self):
+
+        get_random_joke_internet = requests.get(
+            "https://official-joke-api.appspot.com/random_joke"
+        )
+        return get_random_joke_internet.json()
 
     def give_answer(self):
         output = self.get_tool()
@@ -117,8 +127,9 @@ class Agent:
             answer = self.do_calculation(num1, num2, operation)
             return answer
         elif output["next"] == "do_joke":
-            audience = output["audience"]
-            answer = self.do_joke(audience)
+            answer = self.do_joke()
+            # answer = "get a joke"
+            answer = answer["setup"] + "\n" + answer["punchline"]
             return answer
 
 
@@ -130,5 +141,3 @@ output = agent.get_tool()
 answer = agent.give_answer()
 answer_text = f"[dark_orange]Answer for '{user_prompt}':[/] [green]{answer}[/]"
 console.print(answer_text)
-
-
