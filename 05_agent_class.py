@@ -73,8 +73,8 @@ Thank you for your help.
 system_message += ai_programming
 
 
-user_prompt = "What is 5 times 9?"
-user_prompt = "Tell me a joke when I am doing stand up at a Builders Conference"
+user_prompt = "What is 20 divided by 2?"
+# user_prompt = "Tell me a joke when I am doing stand up at a Builders Conference"
 
 prompts = [
     {"role": "system", "content": system_message},
