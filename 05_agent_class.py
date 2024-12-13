@@ -75,7 +75,7 @@ Thank you for your help.
 system_message += ai_programming
 
 
-user_prompt = "What is 20 divided by 2?"
+user_prompt = "What is 28 divided by 2?"
 # user_prompt = "Tell me a joke when I am doing stand up at a Builders Conference"
 
 prompts = [
@@ -87,12 +87,12 @@ prompts = [
 class Agent:
     def __init__(self, model="gpt-3.5-turbo", prompts=prompts):
         self.model = model
-        self.prompt = prompts
+        self.prompts = prompts
 
     def get_tool(self):
         # print(self.prompt)
         response = openai.chat.completions.create(
-            model=self.model, messages=self.prompt
+            model=self.model, messages=self.prompts
         )
         output = response.choices[0].message.content.replace("\n", "")
         # print(output)
