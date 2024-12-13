@@ -64,10 +64,10 @@ EXAMPLES
     ## Second Example
     
     ### Question
-    "Tell me a joke when I am doing stand up at a Builders Conference"
+    "Tell me a joke"
     ### Response 
     
-    {"tool": "joke", "next": "do_joke", "audience": "Pythonistas" }}
+    {"tool": "joke", "next": "do_joke"}
     
 Thank you for your help.
 """
@@ -75,8 +75,8 @@ Thank you for your help.
 system_message += ai_programming
 
 
-user_prompt = "What is 28 divided by 2?"
-# user_prompt = "Tell me a joke when I am doing stand up at a Builders Conference"
+# user_prompt = "What is 28 divided by 2?"
+user_prompt = "Tell me a joke"
 
 prompts = [
     {"role": "system", "content": system_message},
@@ -124,14 +124,14 @@ class Agent:
         console.print("output type: ", type(output))
 
         if output["next"] == "do_calculation":
-            console.print("[purple italic]do_calculation...[/]")
+            console.print("[purple italic]\ndo_calculation()...[/]")
             num1 = output["arguments"]["num1"]
             num2 = output["arguments"]["num2"]
             operation = output["arguments"]["operation"]
             answer = self.do_calculation(num1, num2, operation)
             return answer
         elif output["next"] == "do_joke":
-            console.print("[purple italic]do_joke...[/]")
+            console.print("[purple italic]\ndo_joke()...[/]")
 
             answer = self.do_joke()
             # answer = "get a joke"
@@ -145,5 +145,5 @@ output = agent.get_tool()
 
 
 answer = agent.give_answer()
-answer_text = f"[dark_orange]Answer for '{user_prompt}':[/] [green]{answer}[/]"
-console.print(answer_text)
+answer_text = f"[dark_orange]Answer for: '{user_prompt}':[/]\n[green]{answer}[/]"
+console.print(answer_text, "\n")
