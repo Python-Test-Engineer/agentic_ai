@@ -4,6 +4,7 @@ import re
 from colorama import Fore
 from dotenv import load_dotenv
 from groq import Groq
+from openai import OpenAI
 
 from agentic_patterns.tool_pattern.tool import Tool
 from agentic_patterns.tool_pattern.tool import validate_arguments
@@ -15,6 +16,7 @@ from agentic_patterns.utils.extraction import extract_tag_content
 
 load_dotenv()
 
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 TOOL_SYSTEM_PROMPT = """
 You are a function calling AI model. You are provided with function signatures within <tools></tools> XML tags.
