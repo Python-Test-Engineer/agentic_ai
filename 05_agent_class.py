@@ -75,8 +75,8 @@ Thank you for your help.
 system_message += ai_programming
 
 
-# user_prompt = "What is 28 divided by 2?"
-user_prompt = "Tell me a joke"
+user_prompt = "What is 28 divided by 2?"
+# user_prompt = "Tell me a joke"
 
 prompts = [
     {"role": "system", "content": system_message},
