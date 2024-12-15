@@ -1,19 +1,52 @@
 import json
 import re
-
+import os
 from colorama import Fore
 from dotenv import load_dotenv
 from groq import Groq
+from openai import OpenAI
 
-from agentic_patterns.tool_pattern.tool import Tool
-from agentic_patterns.tool_pattern.tool import validate_arguments
-from agentic_patterns.utils.completions import build_prompt_structure
-from agentic_patterns.utils.completions import ChatHistory
-from agentic_patterns.utils.completions import completions_create
-from agentic_patterns.utils.completions import update_chat_history
-from agentic_patterns.utils.extraction import extract_tag_content
+from tool_pattern.tool import Tool
+from tool_pattern.tool import validate_arguments
+from utils.completions import build_prompt_structure
+from utils.completions import ChatHistory
+from utils.completions import completions_create
+from utils.completions import update_chat_history
+from utils.extraction import extract_tag_content
 
 load_dotenv()
+
+# Remember to load the environment variables. You should have the Groq API Key in there :)
+load_dotenv()
+
+openai_api_key = os.getenv("OPENAI_API_KEY")
+anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
+groq_api_key = os.getenv("GROQ_API_KEY")
+
+
+if openai_api_key:
+    print(f"OpenAI API Key exists and begins {openai_api_key[:8]}")
+else:
+    print("OpenAI API Key not set")
+
+if anthropic_api_key:
+    print(f"Anthropic API Key exists and begins {anthropic_api_key[:7]}")
+else:
+    print("Anthropic API Key not set")
+
+if groq_api_key:
+    print(f"groq API Key exists and begins {groq_api_key[:7]}")
+else:
+    print("Groq API Key not set")
+
+LLM = "OPENAI"
+if LLM == "OPENAI":
+    client = OpenAI()
+    MODEL = "gpt-4o-mini"
+else:
+    client = Groq()
+    MODEL = "llama3-groq-70b-8192-tool-use-preview"
+
 
 BASE_SYSTEM_PROMPT = ""
 
@@ -72,14 +105,16 @@ class ReactAgent:
     def __init__(
         self,
         tools: Tool | list[Tool],
-        model: str = "llama-3.1-70b-versatile",
         system_prompt: str = BASE_SYSTEM_PROMPT,
+        client=client,
+        model=MODEL,
     ) -> None:
-        self.client = Groq()
+        self.client = client
         self.model = model
         self.system_prompt = system_prompt
         self.tools = tools if isinstance(tools, list) else [tools]
         self.tools_dict = {tool.name: tool for tool in self.tools}
+        print(f"LLM: {self.client} and Model {self.model}")
 
     def add_tool_signatures(self) -> str:
         """

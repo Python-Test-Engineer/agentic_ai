@@ -1,9 +1,10 @@
 from collections import deque
 
 from colorama import Fore
-from graphviz import Digraph  # type: ignore
 
-from agentic_patterns.utils.logging import fancy_print
+# from graphviz import Digraph  # type: ignore
+
+from utils.logging import fancy_print
 
 
 class Crew:
