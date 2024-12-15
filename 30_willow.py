@@ -13,7 +13,15 @@ api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI()
 print(api_key)
 
-
+# Send the planning system prompt to the LLM to create a plan and save those tasks as a list.
+# For every task in that list:
+# Keep track of the task given to the agent.
+# Pull in the task prompt with the history.
+# Call the LLM to choose a tool based on the given task and return as JSON.
+# Update our memory with the LLM response.
+# Match the tool called by the LLM to one of the tools available.
+# Run the function called.
+# Start the next task.
 class Agent:
     def __init__(self):
 
