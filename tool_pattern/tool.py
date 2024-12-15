@@ -1,6 +1,10 @@
 import json
 from typing import Callable
 
+from rich.console import Console
+
+console = Console()
+
 
 def get_fn_signature(fn: Callable) -> dict:
     """
@@ -21,6 +25,7 @@ def get_fn_signature(fn: Callable) -> dict:
     schema = {
         k: {"type": v.__name__} for k, v in fn.__annotations__.items() if k != "return"
     }
+
     fn_signature["parameters"]["properties"] = schema
     return fn_signature
 

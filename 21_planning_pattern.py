@@ -11,6 +11,10 @@ from openai import OpenAI
 from tool_pattern.tool import tool
 from utils.extraction import extract_tag_content
 
+from rich.console import Console
+
+console = Console()
+
 load_dotenv()
 
 openai_api_key = os.getenv("OPENAI_API_KEY")
@@ -91,40 +95,10 @@ def compute_log(x: int) -> float | str:
     return math.log(x)
 
 
-@tool
-def divide_two_numbers(x: int, y: int) -> float | str:
-    """
-    A function to divide two numbers.
-
-    Divides `x` by  `y` and returns the result.
-
-    Args:
-        x (int): The integer value for which the half value is computed. Must be greater than 0.
-        y (int): The integer value for which the half value is computed. Must be greater than 0.
-
-    Returns:
-        float: the result of `x` divided by `y`.
-
-    if x <= 0 or y <= 0:
-
-    Args:
-         x (int): The integer value x
-         y (int): The integer value y
-
-    Returns:
-         float: `x` divided by `y`.
-    """
-    if x <= 0:
-        return "Error is undefined for values less than or equal to 0."
-
-    return x / 2
-
-
 available_tools = {
     "sum_two_elements": sum_two_elements,
-    "multiply_two_elements": multiply_two_elements,
     "compute_log": compute_log,
-    "divide_two_numbers": divide_two_numbers,
+    "multiply_two_elements": multiply_two_elements,
 }
 
 
@@ -177,13 +151,11 @@ tools_signature = (
     + multiply_two_elements.fn_signature
     + ",\n"
     + compute_log.fn_signature
-    + ",\n"
-    + divide_two_numbers.fn_signature
 )
 
-
-print(tools_signature)
-
+console.print(f"[dark_orange] Tools signatures START: [/dark_orange]")
+console.print(tools_signature)
+console.print(f"[dark_orange] Tools signatures END: [/dark_orange]")
 REACT_SYSTEM_PROMPT = REACT_SYSTEM_PROMPT % tools_signature
 
 
@@ -195,5 +167,6 @@ agent = ReactAgent(
 )
 
 USER_QUESTION = "I want to calculate the sum of 100 and 900 and multiply the result by 10.Then get log of that number"
+USER_QUESTION = "I want to calculate the sum of 100 and 900 and multiply the result by 10.  Then calulate the log of that number"
 
 agent.run(user_msg=USER_QUESTION)
