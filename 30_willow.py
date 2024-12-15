@@ -106,7 +106,7 @@ class Agent:
             response_format=format_response,
         )
         llm_response = completion.choices[0].message.content
-        print(llm_response)
+        # print(llm_response)
         return llm_response
 
     def navigate_to_hackernews(self, query):
@@ -157,7 +157,6 @@ class Agent:
                 continue
 
             tool = task_call_json.get("tool")
-            variables = task_call_json.get("variables", [])
 
             if tool == "open_chrome":
                 print("Opening Google Chrome...")
@@ -182,7 +181,7 @@ if __name__ == "__main__":
 
     while True:
         prompt = input("Please enter a prompt (or type 'exit' to quit): ")
-        prompt = "Get all the links from Hacker News."
+
         if prompt.lower() == "exit":
             break
         agent.run(prompt)
