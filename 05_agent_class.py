@@ -31,8 +31,6 @@ else:
 
 openai = OpenAI()
 claude = anthropic.Anthropic()
-
-
 # original propmt
 system_message = """
 You are an assistant that is very good at determining what tool to use to solve queries.
@@ -44,38 +42,28 @@ TOOLS
 
 You have two tools:
 
-1. A calculator tool that can perform basic arithmetic operations, such as addition, subtraction, multiplication, and division. If this tool is used then respond as detailed in JSON Format with "next": "do_calculation"
-2. A jokes tool that can provide a light-hearted joke for the audience reqested. If this tool is used then respond in JSON Format with "next": "do_joke" and "audience": "audience requested"
+1. A calculator tool that can perform basic arithmetic operations, such as addition, subtraction, multiplication, and division. If this tool is used then respond in JSON FORMAT.
 
 
-OUTPUT
+Example JSON format:
 
-For a user query, determine the best tool. If none of the tools are appropriate, respond with "None".
+{"tool": "calculator", "next": "do_calculation", "arguments": {"num1": 5, "num2": 5, "operation": "addition"}} 
 
-EXAMPLES
+2. A jokes tool that can provide a light-hearted joke for the audience reqested. If this tool is used then respond in JSON FORMAT.
 
-    ## First Example
+Example JSON format:
+
+{"tool": "joke", "next": "do_joke", "audience": "Pythonistas" }} 
+
     
-    ### Question
-    "What is 5 plus 5?
-    ### Response    
-    {"tool": "calculator", "next": "do_calculation", "arguments": {"num1": 5, "num2": 5, "operation": "addition"}}
-
-    ## Second Example
-    
-    ### Question
-    "Tell me a joke"
-    ### Response 
-    
-    {"tool": "joke", "next": "do_joke"}
-    
-Thank you for your help.
+Thank you for your being accurate and complete with this query.
 """
 
 system_message += ai_programming
 
+user_prompt = "Tell a light-hearted joke for an audience of Pythonistas in Brighton"
 
-user_prompt = "What is 28 divided by 2?"
+# user_prompt = "What is 28 divided by 2?"
 # user_prompt = "Tell me a joke"
 
 prompts = [
