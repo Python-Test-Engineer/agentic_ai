@@ -1,3 +1,5 @@
+# Agentic AI
+
 <p align="center">
     <img alt="logo" src="img/agentic_patterns.png" width=600 />
     <h1 align="center">Agentic Patterns</h1>
@@ -12,23 +14,25 @@
 
 ## Table of Contents
 
-- [1. Introduction](#introduction)
-  - [1.1 Reflection Pattern](#reflection-pattern-)
-  - [1.2 Tool Pattern](#tool-pattern--)
-  - [1.3 Planning Pattern](#planning-pattern-)
-  - [1.4 Multiagent Pattern](#multiagent-pattern-)
-
-- [2. The 4 Agentic Patterns](#the-4-agentic-patterns)
-
-- [3. Installation](#installation)
-- [4. Groq API Key](#groq-api-key)
-- [5. Usage](#usage)
-  - [5.1 Using a Reflection Agent - Reflection Pattern](#using-a-reflection-agent---reflection-pattern)
-  - [5.2 Creating and Using Tools - Tool Use Pattern](#creating-and-using-tools---tool-use-pattern)
-  - [5.3 Reasoning with a ReAct Agent - Planning Pattern](#reasoning-with-a-react-agent---planning-pattern)
-  - [5.4 Defining and running a Crew of Agents - MultiAgent Pattern](#defining-and-running-a-crew-of-agents---multiagent-pattern)
-- [6. Recommended Workflow](#recommended-workflow)
-- [7. Star History](#star-history)
+- [Agentic AI](#agentic-ai)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [The 4 Agentic patterns](#the-4-agentic-patterns)
+    - [Reflection Pattern 🤔](#reflection-pattern-)
+    - [Tool Pattern  🛠](#tool-pattern--)
+    - [Planning Pattern 🧠](#planning-pattern-)
+    - [Multiagent Pattern 🧑🏽‍🤝‍🧑🏻](#multiagent-pattern-)
+  - [Installation](#installation)
+    - [Option 1: Use Poetry:](#option-1-use-poetry)
+    - [Option 2: Install the PyPi library](#option-2-install-the-pypi-library)
+  - [Groq API Key](#groq-api-key)
+  - [Usage](#usage)
+    - [Using a Reflection Agent - Reflection Pattern](#using-a-reflection-agent---reflection-pattern)
+    - [Creating and Using Tools - Tool Use Pattern](#creating-and-using-tools---tool-use-pattern)
+    - [Reasoning with a ReAct Agent - Planning Pattern](#reasoning-with-a-react-agent---planning-pattern)
+    - [Defining and running a Crew of Agents - MultiAgent Pattern](#defining-and-running-a-crew-of-agents---multiagent-pattern)
+  - [Recommended Workflow](#recommended-workflow)
+  - [Star History](#star-history)
 
 
 ## Introduction
