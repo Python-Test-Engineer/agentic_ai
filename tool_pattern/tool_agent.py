@@ -1,6 +1,6 @@
 import json
 import re
-
+import os
 from colorama import Fore
 from dotenv import load_dotenv
 from groq import Groq
