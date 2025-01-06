@@ -1,4 +1,11 @@
 # https://python-course.eu/applications-python/finite-state-machine.php
+# We want to recognize the meaning of very small sentences with an extremely limited vocabulary and syntax.
+# These sentences should start with "Python is" followed by
+# an adjective or
+# the word "not" followed by an adjective. e.g.
+# "Python is great" → positive meaning
+# "Python is stupid" → negative meaning
+# "Python is not ugly" → positive meaning
 
 class InitializationError(Exception):
     pass
