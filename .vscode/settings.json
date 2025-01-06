@@ -1,8 +1,8 @@
 {
-   "editor.tokenColorCustomizations": {
+   "editor.tokenColorustomizations": {
       "comments": "#ff8c00"
    },
-   "window.zoomLevel": 2.0,
+   "window.zoomLevel": 1,
    "editor.fontSize": 18,
    "editor.lineHeight": 25,
    "terminal.integrated.fontSize": 20,
@@ -156,4 +156,5 @@
    ],
    "python.testing.unittestEnabled": false,
    "python.testing.pytestEnabled": true,
+   "notebook.output.lineHeight": 2,
 }
