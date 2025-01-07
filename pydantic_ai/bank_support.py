@@ -42,7 +42,7 @@ class SupportResult(BaseModel):
 
 
 support_agent = Agent(
-    "openai:gpt-4o",
+    "openai:gpt-4o-mini",
     deps_type=SupportDependencies,
     result_type=SupportResult,
     system_prompt=(

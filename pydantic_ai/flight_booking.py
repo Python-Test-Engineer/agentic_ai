@@ -49,7 +49,7 @@ search_agent = Agent[Deps, FlightDetails | NoFlightFound](
 
 # This agent is responsible for extracting flight details from web page text.
 extraction_agent = Agent(
-    "openai:gpt-4o",
+    "openai:gpt-4o-mini",
     result_type=list[FlightDetails],
     system_prompt="Extract all the flight details from the given text.",
 )
