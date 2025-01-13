@@ -4,7 +4,9 @@ from pydantic_ai import Agent
 from pydantic_ai.models.openai import OpenAIModel
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv, find_dotenv
+from rich.console import Console
 
+console = Console()
 load_dotenv(find_dotenv())
 
 # Configure logfire
@@ -68,3 +70,10 @@ result = agent.run_sync(
 
 # logfire.notice("Invoice markdown prompt LLM results: {result}", result=str(result.data))
 # logfire.info("Result type: {result}", result=type(result.data))
+
+# console.print(result.data)
+console.print("[cyan]==============================[/cyan]")
+output = result.data.model_dump()
+
+for key, value in output.items():
+    console.print(f"{key}: {value}")
