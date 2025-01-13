@@ -4,9 +4,7 @@ from pydantic_ai import Agent
 from pydantic_ai.models.openai import OpenAIModel
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv, find_dotenv
-from rich.console import Console
 
-console = Console()
 load_dotenv(find_dotenv())
 
 # Configure logfire
